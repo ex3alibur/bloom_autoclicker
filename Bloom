@@ -1,0 +1,29 @@
+from pyautogui import *
+import pyautogui
+import time
+import keyboard
+import random
+import win32api, win32con
+
+
+time.sleep(2)
+def click(x,y):
+    win32api.SetCursorPos((x,y))
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0 ,0)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)
+
+
+# X:  945 Y:  527 RGB: (206, 219,   0)
+while keyboard.is_pressed('q') == False:
+    pic = pyautogui.screenshot(region=(768,250,385,590))
+    width, height = pic.size
+
+    for x in range (0, width, 3):
+        for y in range(0, height, 3):
+
+            r,g,b = pic.getpixel((x, y))
+
+            if(g in range(200, 255)) and (r in range(180,229)) and b <= 60:
+                click(x + 768, y + 250)
+                time.sleep(0.001)
+                break
